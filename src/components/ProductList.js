@@ -7,6 +7,7 @@ import { allCarts } from '../redux/actions/actionCart'
 
 const ProductList = () =>{
   const dispatch = useDispatch()
+  
   const [data, setData] = useState([])
   const [filtered, setFilter] = useState(data)
   const [loading, setLoading] = useState(true)
@@ -19,15 +20,16 @@ const ProductList = () =>{
         setData(newData)
         setFilter(newData)
         setLoading(false)
-        
+        dispatch(allCarts(newData))
       }
     }
+    
     getProducts()
   },[])
 
-  useEffect(()=>{
-    dispatch(allCarts(data))
-  },[loading])
+  // useEffect(()=>{
+  //   console.log(cartCounter)
+  // },[cartCounter])
 
 
   const setFilterCategory = (arg) =>{

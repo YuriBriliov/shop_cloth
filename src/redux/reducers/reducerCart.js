@@ -6,7 +6,8 @@ export const reducerCart = (state = [], action) =>{
   switch (type) {
     case ADD_CART: {
       const { data } = payload
-      return [ data ]
+      // const newData = [...state, data]
+      return [...state, data]
     }
 
     case DELETE_CART: {

@@ -10,7 +10,7 @@ const allItems = (data)=>{
 const addCart = (data) =>{
   return{
     type: ADD_CART,
-    payload: {data}
+    payload: { data }
   }
 }
 
@@ -23,18 +23,16 @@ const deleteCart = (data) =>{
 
 export const allCarts = (carts) => async (dispatch) =>{
   try {
-    // console.log(data)
     dispatch(allItems(carts))
   } catch (error) {
     console.log(error)
   }
 }
 
-export const newItem = (id) => async (dispatch) =>{
+export const newItem = (item) => async (dispatch) =>{
   try {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`)
-    const data = await response.json()
-    dispatch(addCart(data))
+
+    dispatch(addCart(item))
   } catch (error) {
     console.log(error)
   }

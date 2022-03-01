@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
+import { newItem } from '../redux/actions/actionCart'
 
 
 const Product = () =>{
@@ -27,6 +27,15 @@ const Product = () =>{
     getProdunt()
   },[])
 
+  const addItem = () =>{
+    carts.forEach(item => {
+      if (item.id == id) {
+        dispatch(newItem(item))
+      }
+    });
+    
+  }
+
 
   const Loading = () =>{
     return(
@@ -41,19 +50,15 @@ const Product = () =>{
     )
   }
 
-  const addItem = () =>{
-    carts.forEach(item => {
-      if (item.id == id) {
-        console.log(item)
-      }
-    });
-    
-  }
-
 
   const ShowProduct = () =>{
     return(
       <>
+        <div className='col-md-12 my-4'>
+          <NavLink style={{border: "1px solid black", padding: "10px", margin: "10px", borderRadius: "45%"}} to="/products">
+            <i className='fa fa-arrow-left text-black-50 text-uppercase'></i>
+          </NavLink>
+        </div>
         <div className="col-md-6">
           <img src={product.image} alt="img" height="400px" width="400px"/>
         </div>
