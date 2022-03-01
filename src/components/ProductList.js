@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { allCarts } from '../redux/actions/actionCart'
 
 const ProductList = () =>{
-
+  const dispatch = useDispatch()
   const [data, setData] = useState([])
   const [filtered, setFilter] = useState(data)
   const [loading, setLoading] = useState(true)
@@ -16,10 +19,15 @@ const ProductList = () =>{
         setData(newData)
         setFilter(newData)
         setLoading(false)
+        
       }
     }
     getProducts()
   },[])
+
+  useEffect(()=>{
+    dispatch(allCarts(data))
+  },[loading])
 
 
   const setFilterCategory = (arg) =>{
@@ -27,7 +35,6 @@ const ProductList = () =>{
       return item.category === arg
     })
     setFilter(newData)
-
   }
 
   const Loading = () =>{
@@ -69,7 +76,7 @@ const ProductList = () =>{
                     <p className="card-text lead fw-bold">
                       ${products.price}
                     </p>
-                    <a href="#" className="btn btn-outline-dark">Buy Now</a>
+                    <Link to={`/product/${products.id}`} className="btn btn-outline-dark">Buy Now</Link>
                   </div>
                 </div>
               </div>
